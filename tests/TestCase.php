@@ -32,9 +32,7 @@ abstract class TestCase extends BaseTestCase
 
     public static function setUpBeforeClass()
     {
-        self::setUpFirebase();
-
-        self::$firestore = self::$firebase->getFirestore();
+        self::setUpFirestore();
         self::$testCollection = 'tests';
 
         try {
@@ -45,10 +43,8 @@ abstract class TestCase extends BaseTestCase
         }
     }
 
-    public static function setUpFirebase()
+    public static function setUpFirestore()
     {
-        $credentialsPath = self::$fixturesDir.'/test_credentials.json';
-
         try {
             self::$serviceAccount = ServiceAccount::fromArray([
                 'project_id'   => $_ENV['FIREBASE_PROJECT_ID'],
@@ -57,14 +53,13 @@ abstract class TestCase extends BaseTestCase
                 'private_key'  => str_replace('\n', "\n", $_ENV['FIREBASE_PRIVATE_KEY'])
             ]);
         } catch (\Throwable $e) {
-            dump($e);
-            self::markTestSkipped('The integration tests require a credentials file at "'.$credentialsPath.'"."');
+            self::markTestSkipped('The integration tests require FIREBASE_PROJECT_ID, FIREBASE_CLIENT_ID, FIREBASE_CLIENT_EMAIL and FIREBASE_PRIVATE_KEY env variables');
 
             return;
         }
 
-        self::$firebase = (new Factory())
+        self::$firestore = (new Factory())
             ->withServiceAccount(self::$serviceAccount)
-            ->create();
+            ->createFirestore();
     }
 }

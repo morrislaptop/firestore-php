@@ -17,19 +17,7 @@ class Factory extends BaseFactory
 
     private static $firestoreUriPattern = 'https://firestore.googleapis.com/v1beta1/projects/%s/databases/(default)/documents/';
 
-    public function create() : BaseFirebase
-    {
-        $database = $this->createDatabase();
-        $firestore = $this->createFirestore();
-        $auth = $this->createAuth();
-        $storage = $this->createStorage();
-        $remoteConfig = $this->createRemoteConfig();
-        $messaging = $this->createMessaging();
-
-        return new Firebase($database, $firestore, $auth, $storage, $remoteConfig, $messaging);
-    }
-
-    private function createFirestore() : Firestore
+    public function createFirestore() : Firestore
     {
         $http = $this->createApiClient($this->getServiceAccount());
 

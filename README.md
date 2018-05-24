@@ -35,11 +35,9 @@ use Kreait\Firebase\ServiceAccount;
 // as this PHP file.
 $serviceAccount = ServiceAccount::fromJsonFile(__DIR__ . '/google-service-account.json');
 
-$firebase = (new Factory)
+$firestore = (new Factory)
     ->withServiceAccount($serviceAccount)
-    ->create();
-
-$firestore = $firebase->getFirestore();
+    ->createFirestore();
 
 $collection = self::$firestore->getCollection('users');
 $user = $collection->getDocument('123456');
