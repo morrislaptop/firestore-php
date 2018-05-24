@@ -1,7 +1,7 @@
 # Firestore SDK for PHP without gRPC
 
-[![Current version](https://img.shields.io/packagist/v/kreait/firebase-php.svg)](https://packagist.org/packages/kreait/firebase-php)
-[![Build Status](https://img.shields.io/circleci/project/morrislaptop/vue-web3.svg)](https://circleci.com/gh/morrislaptop/vue-web3)
+[![Current version](https://img.shields.io/packagist/v/morrisalptop/firestore-php.svg)](https://packagist.org/packages/morrislaptop/firestore-php)
+[![Build Status](https://img.shields.io/circleci/project/morrislaptop/firestore-php.svg)](https://circleci.com/gh/morrislaptop/firestore-php)
 
 ## @todo
 
