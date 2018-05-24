@@ -1,5 +1,6 @@
 {
     "name": "@morrislaptop/firestore-php",
+    "private": true,
     "release": {
         "verifyConditions": [
             "@semantic-release/github"
