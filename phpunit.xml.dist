@@ -1,0 +1,18 @@
+<phpunit    bootstrap="vendor/autoload.php"
+            colors="true"
+            convertErrorsToExceptions="true"
+            convertNoticesToExceptions="true"
+            convertWarningsToExceptions="true"
+            stopOnFailure="true">
+            <testsuites>
+                <testsuite name="Unit Tests">
+                    <directory>tests</directory>
+                </testsuite>
+            </testsuites>
+            <php>
+                <env name="FIREBASE_CLIENT_ID" value="adfasas" />
+                <env name="FIREBASE_CLIENT_EMAIL" value="firebase-adminsdk-8cz9e@dfadasdaf.iam.gserviceaccount.com" />
+                <env name="FIREBASE_PROJECT_ID" value="dafdasfdfa" />
+                <env name="FIREBASE_PRIVATE_KEY" value="-----BEGIN PRIVATE KEY-----\ndfasdfafdafdfsafsa\n-----END PRIVATE KEY-----\n" />
+            </php>
+</phpunit>

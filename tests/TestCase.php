@@ -50,7 +50,12 @@ abstract class TestCase extends BaseTestCase
         $credentialsPath = self::$fixturesDir.'/test_credentials.json';
 
         try {
-            self::$serviceAccount = ServiceAccount::fromJsonFile($credentialsPath);
+            self::$serviceAccount = ServiceAccount::fromArray([
+                'project_id'   => $_ENV['FIREBASE_PROJECT_ID'],
+                'client_id'    => $_ENV['FIREBASE_CLIENT_ID'],
+                'client_email' => $_ENV['FIREBASE_CLIENT_EMAIL'],
+                'private_key'  => str_replace('\n', "\n", $_ENV['FIREBASE_PRIVATE_KEY'])
+            ]);
         } catch (\Throwable $e) {
             dump($e);
             self::markTestSkipped('The integration tests require a credentials file at "'.$credentialsPath.'"."');
