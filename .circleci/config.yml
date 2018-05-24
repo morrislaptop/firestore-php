@@ -35,3 +35,7 @@ jobs:
 
       # run tests!
       - run: phpunit
+
+      - run:
+          name: release
+          command: npx semantic-release || true
