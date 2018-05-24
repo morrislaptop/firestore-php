@@ -2,7 +2,6 @@
 
 namespace Morrislaptop\Firestore;
 
-use Kreait\Firebase\Database\ApiClient;
 use Psr\Http\Message\UriInterface;
 use GuzzleHttp\Psr7\Uri;
 

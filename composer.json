@@ -15,14 +15,11 @@
         "issues": "https://github.com/morrislaptop/firestore-php/issues",
         "source": "https://github.com/morrislaptop/firestore-php"
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/morrislaptop/firebase-php"
-        }
-    ],
+    "scripts": {
+        "test": "phpunit"
+    },
     "require": {
-        "kreait/firebase-php": "dev-extensible"
+        "kreait/firebase-php": "dev-master"
     },
     "require-dev": {
         "morrislaptop/var-dumper-with-context": "^0.2.0",
