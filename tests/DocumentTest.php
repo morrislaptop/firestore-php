@@ -33,20 +33,18 @@ class DocumentTest extends TestCase
         }
     }
 
-    public function testUpdate()
+    public function testSetMergeAndGet()
     {
-        $this->markTestIncomplete('This test has not been implemented yet.');
-
-        $ref = $this->ref->getChild(__FUNCTION__);
-        $ref->set([
+        $doc = $this->collection->getDocument(__FUNCTION__);
+        $doc->set([
             'first' => 'value',
             'second' => 'value',
         ]);
 
-        $ref->update([
+        $doc->set([
             'first' => 'updated',
             'third' => 'new',
-        ]);
+        ], true);
 
         $expected = [
             'first' => 'updated',
@@ -54,7 +52,7 @@ class DocumentTest extends TestCase
             'third' => 'new',
         ];
 
-        $this->assertEquals($expected, $ref->getValue());
+        $this->assertEquals($expected, $doc->getSnapshot()->data());
     }
 
     public function testPush()

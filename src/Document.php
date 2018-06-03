@@ -313,14 +313,24 @@ class Document
      *
      * @return Reference
      */
-    public function set($value): self
+    public function set($value, $merge = false): self
     {
-        $value = [
+        $payload = [
             'name' => basename($this->uri->getPath()),
-            'fields' => $this->valueMapper->encodeValues($value)
+            'fields' => $this->valueMapper->encodeValues($value),
         ];
 
-        $this->apiClient->set($this->uri, $value);
+        if ($merge) {
+            $paths = $this->valueMapper->encodeFieldPaths($value);
+            $prefix = '&updateMask.fieldPaths=';
+            $query = $prefix . implode($prefix, $paths);
+            $uri = $this->uri->withQuery("updateMask.fieldPaths=message$query");
+        }
+        else {
+            $uri = $this->uri;
+        }
+
+        $this->apiClient->set($uri, $payload);
 
         return $this;
     }
