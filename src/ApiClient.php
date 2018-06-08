@@ -34,6 +34,13 @@ class ApiClient
         return JSON::decode((string) $response->getBody(), true);
     }
 
+    public function post($uri, $value)
+    {
+        $response = $this->request('POST', $uri, ['json' => $value]);
+
+        return JSON::decode((string) $response->getBody(), true);
+    }
+
     public function push($uri, $value): string
     {
         $response = $this->request('POST', $uri, ['json' => $value]);

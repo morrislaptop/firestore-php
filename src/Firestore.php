@@ -52,4 +52,15 @@ class Firestore
             throw new InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
     }
+
+    /**
+     * Returns the root collections.
+     */
+    public function getRootCollections()
+    {
+        $uri = $this->uri->withPath($this->uri->getPath() . ':listCollectionIds');
+        $value = $this->client->post($uri, null);
+
+        return $value;
+    }
 }
