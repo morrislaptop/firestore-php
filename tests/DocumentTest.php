@@ -5,13 +5,13 @@ namespace Morrislaptop\Firestore\Tests;
 class DocumentTest extends TestCase
 {
     /**
-     * @var Collection
+     * @var CollectionReference
      */
     private $collection;
 
     public function setUp()
     {
-        $this->collection = self::$firestore->getCollection(self::$testCollection);
+        $this->collection = self::$firestore->collection(self::$testCollection);
     }
 
     /**
@@ -22,11 +22,11 @@ class DocumentTest extends TestCase
      */
     public function testSetAndGet()
     {
-        $doc = $this->collection->getDocument(__FUNCTION__);
+        $doc = $this->collection->document(__FUNCTION__);
 
         $doc->set($this->validValues());
 
-        $snap = $doc->getSnapshot();
+        $snap = $doc->snapshot();
 
         foreach ($this->validValues() as $key => $value) {
             $this->assertSame($value, $snap[$key]);
@@ -35,7 +35,8 @@ class DocumentTest extends TestCase
 
     public function testSetMergeAndGet()
     {
-        $doc = $this->collection->getDocument(__FUNCTION__);
+        $doc = $this->collection->document(__FUNCTION__);
+
         $doc->set([
             'first' => 'value',
             'second' => 'value',
@@ -52,36 +53,7 @@ class DocumentTest extends TestCase
             'third' => 'new',
         ];
 
-        $this->assertEquals($expected, $doc->getSnapshot()->data());
-    }
-
-    public function testPush()
-    {
-        $this->markTestIncomplete('This test has not been implemented yet.');
-
-        $ref = $this->ref->getChild(__FUNCTION__);
-        $value = 'a value';
-
-        $newRef = $ref->push($value);
-
-        $this->assertSame(1, $ref->getSnapshot()->numChildren());
-        $this->assertSame($value, $newRef->getValue());
-    }
-
-    public function testRemove()
-    {
-        $this->markTestIncomplete('This test has not been implemented yet.');
-
-        $ref = $this->ref->getChild(__FUNCTION__);
-
-        $ref->set([
-            'first' => 'value',
-            'second' => 'value',
-        ]);
-
-        $ref->getChild('first')->remove();
-
-        $this->assertEquals(['second' => 'value'], $ref->getValue());
+        $this->assertEquals($expected, $doc->snapshot()->data());
     }
 
     public function validValues()

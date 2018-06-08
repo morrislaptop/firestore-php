@@ -44,10 +44,10 @@ class Firestore
      *
      * @return Reference
      */
-    public function getCollection(string $path = ''): Collection
+    public function collection(string $path = ''): CollectionReference
     {
         try {
-            return new Collection(Uri::resolve($this->uri, $path), $this->client);
+            return new CollectionReference(Uri::resolve($this->uri, $path), $this->client);
         } catch (\InvalidArgumentException $e) {
             throw new InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
@@ -56,7 +56,7 @@ class Firestore
     /**
      * Returns the root collections.
      */
-    public function getRootCollections()
+    public function collections()
     {
         $uri = $this->uri->withPath($this->uri->getPath() . ':listCollectionIds');
         $value = $this->client->post($uri, null);

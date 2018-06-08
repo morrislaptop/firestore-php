@@ -36,7 +36,7 @@ abstract class TestCase extends BaseTestCase
         self::$testCollection = 'tests';
 
         try {
-            self::$firestore->getCollection(self::$testCollection)->remove();
+            self::$firestore->collection(self::$testCollection)->remove();
         }
         catch (\Exception $e) {
             // assuming it just doesn't exist yet, continue with tests

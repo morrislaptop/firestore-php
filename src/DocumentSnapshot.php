@@ -40,7 +40,7 @@ use Google\Cloud\Core\Timestamp;
  * $bitcoinWalletValue = $snapshot['wallet']['cryptoCurrency']['bitcoin'];
  * ```
  */
-class Snapshot implements \ArrayAccess
+class DocumentSnapshot implements \ArrayAccess
 {
     /**
      * @var DocumentReference
@@ -75,7 +75,7 @@ class Snapshot implements \ArrayAccess
      * @param bool $exists Whether the document exists in the Firestore database.
      */
     public function __construct(
-        Document $reference,
+        DocumentReference $reference,
         array $info,
         array $data,
         $exists

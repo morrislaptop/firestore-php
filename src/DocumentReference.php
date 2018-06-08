@@ -14,7 +14,7 @@ use Kreait\Firebase\Exception\InvalidArgumentException;
  *
  * @see https://firebase.google.com/docs/reference/js/firebase.database.Reference
  */
-class Document
+class DocumentReference
 {
     /**
      * @var UriInterface
@@ -55,248 +55,6 @@ class Document
 
         $this->uri = $uri;
         $this->apiClient = $apiClient;
-    }
-
-    /**
-     * The last part of the current path.
-     *
-     * For example, "ada" is the key for https://sample-app.firebaseio.com/users/ada.
-     *
-     * The key of the root Reference is null.
-     *
-     * @see https://firebase.google.com/docs/reference/js/firebase.database.Reference#key
-     *
-     * @return string|null
-     */
-    public function getKey()
-    {
-        $key = basename($this->getPath());
-
-        return '' !== $key ? $key : null;
-    }
-
-    /**
-     * Returns the full path to a reference.
-     *
-     * @return string
-     */
-    public function getPath(): string
-    {
-        return trim($this->uri->getPath(), '/');
-    }
-
-    /**
-     * The parent location of a Reference.
-     *
-     * @see https://firebase.google.com/docs/reference/js/firebase.database.Reference#parent
-     *
-     * @throws OutOfRangeException if requested for the root Reference
-     *
-     * @return Reference
-     */
-    public function getParent(): self
-    {
-        $parentPath = \dirname($this->getPath());
-
-        if ('.' === $parentPath) {
-            throw new OutOfRangeException('Cannot get parent of root reference');
-        }
-
-        /* @noinspection ExceptionsAnnotatingAndHandlingInspection */
-        return new self($this->uri->withPath($parentPath), $this->apiClient, $this->validator);
-    }
-
-    /**
-     * The root location of a Reference.
-     *
-     * @see https://firebase.google.com/docs/reference/js/firebase.database.Reference#root
-     *
-     * @return Reference
-     */
-    public function getRoot(): self
-    {
-        /* @noinspection ExceptionsAnnotatingAndHandlingInspection */
-        return new self($this->uri->withPath('/'), $this->apiClient, $this->validator);
-    }
-
-    /**
-     * Gets a Reference for the location at the specified relative path.
-     *
-     * The relative path can either be a simple child name (for example, "ada")
-     * or a deeper slash-separated path (for example, "ada/name/first").
-     *
-     * @see https://firebase.google.com/docs/reference/js/firebase.database.Reference#child
-     *
-     * @param string $path
-     *
-     * @throws InvalidArgumentException if the path is invalid
-     *
-     * @return Reference
-     */
-    public function getChild(string $path): self
-    {
-        $childPath = sprintf('%s/%s', trim($this->uri->getPath(), '/'), trim($path, '/'));
-
-        try {
-            return new self($this->uri->withPath($childPath), $this->apiClient, $this->validator);
-        } catch (\InvalidArgumentException $e) {
-            throw new InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
-        }
-    }
-
-    /**
-     * Generates a new Query object ordered by the specified child key.
-     *
-     * @see Query::orderByChild()
-     *
-     * @param string $path
-     *
-     * @return Query
-     */
-    public function orderByChild(string $path): Query
-    {
-        /* @noinspection ExceptionsAnnotatingAndHandlingInspection */
-        return $this->query()->orderByChild($path);
-    }
-
-    /**
-     * Generates a new Query object ordered by key.
-     *
-     * @see Query::orderByKey()
-     *
-     * @return Query
-     */
-    public function orderByKey(): Query
-    {
-        /* @noinspection ExceptionsAnnotatingAndHandlingInspection */
-        return $this->query()->orderByKey();
-    }
-
-    /**
-     * Generates a new Query object ordered by child values.
-     *
-     * @see Query::orderByValue()
-     *
-     * @return Query
-     */
-    public function orderByValue(): Query
-    {
-        /* @noinspection ExceptionsAnnotatingAndHandlingInspection */
-        return $this->query()->orderByValue();
-    }
-
-    /**
-     * Generates a new Query limited to the first specific number of children.
-     *
-     * @see Query::limitToFirst()
-     *
-     * @param int $limit
-     *
-     * @return Query
-     */
-    public function limitToFirst(int $limit): Query
-    {
-        return $this->query()->limitToFirst($limit);
-    }
-
-    /**
-     * Generates a new Query object limited to the last specific number of children.
-     *
-     * @see Query::limitToLast()
-     *
-     * @param int $limit
-     *
-     * @return Query
-     */
-    public function limitToLast(int $limit): Query
-    {
-        return $this->query()->limitToLast($limit);
-    }
-
-    /**
-     * Creates a Query with the specified starting point.
-     *
-     * @see Query::startAt()
-     *
-     * @param int|float|string|bool $value $value
-     *
-     * @return Query
-     */
-    public function startAt($value): Query
-    {
-        return $this->query()->startAt($value);
-    }
-
-    /**
-     * Creates a Query with the specified ending point.
-     *
-     * @see Query::endAt()
-     *
-     * @param int|float|string|bool $value
-     *
-     * @return Query
-     */
-    public function endAt($value): Query
-    {
-        return $this->query()->endAt($value);
-    }
-
-    /**
-     * Creates a Query which includes children which match the specified value.
-     *
-     * @see Query::equalTo()
-     *
-     * @param int|float|string|bool $value
-     *
-     * @return Query
-     */
-    public function equalTo($value): Query
-    {
-        return $this->query()->equalTo($value);
-    }
-
-    /**
-     * Creates a Query with shallow results.
-     *
-     * @see Query::shallow()
-     *
-     * @return Query
-     */
-    public function shallow(): Query
-    {
-        return $this->query()->shallow();
-    }
-
-    /**
-     * Returns the keys of a reference's children.
-     *
-     * @throws OutOfRangeException if the reference has no children with keys
-     * @throws ApiException if the API reported an error
-     *
-     * @return string[]
-     */
-    public function getChildKeys(): array
-    {
-        /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
-        $snapshot = $this->shallow()->getSnapshot();
-
-        if (\is_array($value = $snapshot->getValue())) {
-            return array_keys($value);
-        }
-
-        throw new OutOfRangeException(sprintf('%s has no children with keys', $this));
-    }
-
-    /**
-     * Convenience method for {@see getSnapshot()}->getValue().
-     *
-     * @throws ApiException if the API reported an error
-     *
-     * @return mixed
-     */
-    public function getValue()
-    {
-        return $this->getSnapshot()->getValue();
     }
 
     /**
@@ -342,13 +100,13 @@ class Document
      *
      * @return Snapshot
      */
-    public function getSnapshot(): Snapshot
+    public function snapshot(): DocumentSnapshot
     {
         $value = $this->apiClient->get($this->uri);
 
         $data = $this->valueMapper->decodeValues($value['fields']);
 
-        return new Snapshot($this, [], $data, true);
+        return new DocumentSnapshot($this, [], $data, true);
     }
 
     /**
