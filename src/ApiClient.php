@@ -27,7 +27,7 @@ class ApiClient
         return JSON::decode((string) $response->getBody(), true);
     }
 
-    public function set($uri, $value)
+    public function patch($uri, $value)
     {
         $response = $this->request('PATCH', $uri, ['json' => $value]);
 
@@ -41,21 +41,9 @@ class ApiClient
         return JSON::decode((string) $response->getBody(), true);
     }
 
-    public function push($uri, $value): string
-    {
-        $response = $this->request('POST', $uri, ['json' => $value]);
-
-        return JSON::decode((string) $response->getBody(), true)['name'];
-    }
-
-    public function remove($uri)
+    public function delete($uri)
     {
         $this->request('DELETE', $uri);
-    }
-
-    public function update($uri, array $values)
-    {
-        $this->request('PATCH', $uri, ['json' => $values]);
     }
 
     protected function request(string $method, $uri, array $options = []): ResponseInterface

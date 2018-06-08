@@ -14,24 +14,22 @@ use Kreait\Firebase\Exception\InvalidArgumentException;
  *
  * @see https://firebase.google.com/docs/reference/js/firebase.database.Reference
  */
-class CollectionReference
+class CollectionReference extends Query
 {
     /**
      * @var UriInterface
      */
-    private $uri;
+    protected $uri;
 
     /**
      * @var ApiClient
      */
-    private $apiClient;
+    protected $apiClient;
 
     /**
-     * @var Validator
+     * @var ValueMapper
      */
-    private $validator;
-
-	protected $valueMapper;
+    protected $valueMapper;
 
     /**
      * Creates a new Reference instance for the given URI which is accessed by
@@ -43,16 +41,11 @@ class CollectionReference
      *
      * @throws InvalidArgumentException if the reference URI is invalid
      */
-    public function __construct(UriInterface $uri, ApiClient $apiClient, Validator $validator = null, ValueMapper $valueMapper = null)
+    public function __construct(UriInterface $uri, ApiClient $apiClient, ValueMapper $valueMapper = null)
     {
-        $this->validator = $validator ?? new Validator();
-        $this->validator->validateUri($uri);
-
-        $this->valueMapper = $valueMapper ?? new ValueMapper(null, false);
-
         $this->uri = $uri;
         $this->apiClient = $apiClient;
-        $this->valueMapper = $valueMapper;
+        $this->valueMapper = $valueMapper ?? new ValueMapper(null, false);
     }
 
     /**
@@ -74,7 +67,7 @@ class CollectionReference
         $childPath = sprintf('%s/%s', trim($this->uri->getPath(), '/'), trim($path, '/'));
 
         try {
-            return new DocumentReference($this->uri->withPath($childPath), $this->apiClient, $this->validator, $this->valueMapper);
+            return new DocumentReference($this->uri->withPath($childPath), $this->apiClient, $this->valueMapper);
         } catch (\InvalidArgumentException $e) {
             throw new InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }

@@ -60,7 +60,12 @@ class Firestore
     {
         $uri = $this->uri->withPath($this->uri->getPath() . ':listCollectionIds');
         $value = $this->client->post($uri, null);
+        $collections = [];
 
-        return $value;
+        foreach ($value['collectionIds'] as $id) {
+            $collections[] = $this->collection($id);
+        }
+
+        return $collections;
     }
 }

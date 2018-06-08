@@ -27,6 +27,7 @@ use Google\Cloud\Core\TimeTrait;
 use Google\Cloud\Core\ValidateTrait;
 use Google\Cloud\Firestore\Connection\ConnectionInterface;
 use Google\Protobuf\NullValue;
+use function GuzzleHttp\Psr7\uri_for;
 
 /**
  * Normalizes values between Google Cloud PHP and Cloud Firestore.
@@ -35,7 +36,7 @@ class ValueMapper
 {
     use ArrayTrait;
     use DebugInfoTrait;
-    // use PathTrait;
+    use PathTrait;
     use TimeTrait;
     use ValidateTrait;
 
@@ -317,8 +318,7 @@ class ValueMapper
                 break;
 
             case 'referenceValue':
-                $parent = new CollectionReference($this->connection, $this, $this->parentPath($value));
-                return new DocumentReference($this->connection, $this, $parent, $value);
+                return new DocumentReference(uri_for($value), null, $this);
 
             default:
                 throw new \RuntimeException(sprintf(
