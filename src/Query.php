@@ -14,6 +14,10 @@ class Query
     {
         $value = $this->apiClient->get($this->uri);
 
+        if (empty($value)) {
+            return [];
+        }
+
         $rows = [];
         foreach ($value['documents'] as $doc)
         {
