@@ -19,7 +19,8 @@
         "test": "phpunit"
     },
     "require": {
-        "kreait/firebase-php": "dev-master"
+        "kreait/firebase-php": "dev-master",
+        "google/protobuf": "v3.6.0.1"
     },
     "require-dev": {
         "morrislaptop/var-dumper-with-context": "^0.2.0",
