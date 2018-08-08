@@ -39,7 +39,7 @@ $firestore = (new Factory)
     ->withServiceAccount($serviceAccount)
     ->createFirestore();
 
-$collection = self::$firestore->getCollection('users');
+$collection = $firestore->getCollection('users');
 $user = $collection->getDocument('123456');
 
 // Save a document
