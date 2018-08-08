@@ -19,7 +19,7 @@ class Factory extends BaseFactory
 
     public function createFirestore() : Firestore
     {
-        $http = $this->createApiClient($this->getServiceAccount());
+        $http = $this->createApiClient();
 
         if ($this->uid) {
             $authOverride = new Http\Auth\CustomToken($this->uid, $this->claims);
