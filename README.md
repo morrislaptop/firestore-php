@@ -26,7 +26,7 @@ The recommended way to install is with Composer.
 
 ## Usage
 
-The library aims to replicate the API signature of Google's PHP API. https://googlecloudplatform.github.io/google-cloud-php/#/docs/cloud-firestore/v0.11.0/firestore/readme
+The library aims to replicate the API signature of [Google's PHP API](https://googlecloudplatform.github.io/google-cloud-php/#/docs/cloud-firestore/v0.11.0/firestore/readme).
 
 Sample usage:
 
