@@ -26,6 +26,10 @@ The recommended way to install is with Composer.
 
 ## Usage
 
+The library aims to replicate the API signature of Google's PHP API. https://googlecloudplatform.github.io/google-cloud-php/#/docs/cloud-firestore/v0.11.0/firestore/readme
+
+Sample usage:
+
 ```php
 
 use Morrislaptop\Firestore\Factory;
@@ -39,14 +43,14 @@ $firestore = (new Factory)
     ->withServiceAccount($serviceAccount)
     ->createFirestore();
 
-$collection = $firestore->getCollection('users');
-$user = $collection->getDocument('123456');
+$collection = $firestore->collection('users');
+$user = $collection->document('123456');
 
 // Save a document
 $user->set(['name' => 'morrislaptop', 'role' => 'developer']);
 
 // Get a document
-$snap = $user->getSnapshot();
+$snap = $user->snapshot();
 echo $snap['name']; // morrislaptop
 
 ```
