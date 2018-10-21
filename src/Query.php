@@ -12,7 +12,7 @@ class Query
 {
     public function documents(array $options = [])
     {
-        $value = $this->apiClient->get($this->uri);
+        $value = $this->apiClient->get($this->uri . '?' . http_build_query($options));
 
         if (empty($value)) {
             return [];
