@@ -308,7 +308,7 @@ class ValueMapper
             case 'mapValue':
                 $res = [];
 
-                foreach ($value['fields'] as $key => $val) {
+                if (!empty($value['fields'])) foreach ($value['fields'] as $key => $val) {
                     $type = array_keys($val)[0];
 
                     $res[$key] = $this->decodeValue($type, current($val));
