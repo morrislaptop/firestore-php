@@ -17,38 +17,6 @@ use Kreait\Firebase\Exception\InvalidArgumentException;
 class CollectionReference extends Query
 {
     /**
-     * @var UriInterface
-     */
-    protected $uri;
-
-    /**
-     * @var ApiClient
-     */
-    protected $apiClient;
-
-    /**
-     * @var ValueMapper
-     */
-    protected $valueMapper;
-
-    /**
-     * Creates a new Reference instance for the given URI which is accessed by
-     * the given API client and validated by the Validator (obviously).
-     *
-     * @param UriInterface $uri
-     * @param ApiClient $apiClient
-     * @param Validator|null $validator
-     *
-     * @throws InvalidArgumentException if the reference URI is invalid
-     */
-    public function __construct(UriInterface $uri, ApiClient $apiClient, ValueMapper $valueMapper = null)
-    {
-        $this->uri = $uri;
-        $this->apiClient = $apiClient;
-        $this->valueMapper = $valueMapper ?? new ValueMapper(null, false);
-    }
-
-    /**
      * Gets a Reference for the location at the specified relative path.
      *
      * The relative path can either be a simple child name (for example, "ada")

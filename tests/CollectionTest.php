@@ -28,4 +28,19 @@ class CollectionTest extends TestCase
         // Assert.
         $this->assertSame($docs->size(), 30);
     }
+
+    public function testWhere()
+    {
+        // Arrange.
+        for ($i = 0; $i < 5; $i++) {
+            $doc = $this->collection->document(__FUNCTION__ . $i);
+            // $doc->set(['number' => $i]);
+        }
+
+        // Act.
+        $docs = $this->collection->where('number', '>', 3)->documents();
+
+        // Assert.
+        $this->assertSame($docs->size(), 2);
+    }
 }
