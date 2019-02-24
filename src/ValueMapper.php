@@ -296,7 +296,7 @@ class ValueMapper
             case 'arrayValue':
                 $res = [];
 
-                foreach ($value['values'] as $val) {
+                if (!empty($value['fields'])) foreach ($value['values'] as $val) {
                     $type = array_keys($val)[0];
 
                     $res[] = $this->decodeValue($type, current($val));
