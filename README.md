@@ -1,4 +1,4 @@
-# Firestore SDK for PHP (without gRPC)
+# Firestore SDK for Laravel (without gRPC)
 
 ## @todo
 
@@ -22,6 +22,8 @@ The recommended way to install is with Composer.
     composer require tormjens/firestore
 
 ## Usage
+
+The library implements seamless with `kreait/laravel-firebase` so you don't have to set up a client twice.
 
 The library aims to replicate the API signature
 of [Google's PHP API](https://googlecloudplatform.github.io/google-cloud-php/#/docs/cloud-firestore/v0.11.0/firestore/readme)

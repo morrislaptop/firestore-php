@@ -1,6 +1,6 @@
 {
     "name": "tormjens/firestore",
-    "description": "Firestore SDK for PHP without gRPC",
+    "description": "Firestore SDK for Laravel without gRPC",
     "keywords": [
         "firestore",
         "google",
@@ -28,7 +28,7 @@
         "test": "phpunit"
     },
     "require": {
-        "kreait/firebase-php": "^5.14",
+        "kreait/laravel-firebase": "^3.0",
         "google/protobuf": "^v3.14"
     },
     "require-dev": {
