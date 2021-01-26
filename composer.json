@@ -46,5 +46,12 @@
             "TorMorten\\Firestore\\Tests\\": "tests",
             "Kreait\\Firebase\\Tests\\": "vendor/kreait/firebase-php/tests"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "TorMorten\\Firestore\\FirestoreServiceProvider"
+            ]
+        }
     }
 }
