@@ -1,6 +1,6 @@
 <?php
 
-namespace Morrislaptop\Firestore;
+namespace TorMorten\Firestore;
 
 /**
  * A Reference represents a specific location in your database and can be used

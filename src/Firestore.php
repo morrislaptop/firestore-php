@@ -1,6 +1,6 @@
 <?php
 
-namespace Morrislaptop\Firestore;
+namespace TorMorten\Firestore;
 
 use Psr\Http\Message\UriInterface;
 use GuzzleHttp\Psr7\Uri;

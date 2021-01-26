@@ -1,6 +1,6 @@
 <?php
 
-namespace Morrislaptop\Firestore;
+namespace TorMorten\Firestore;
 
 use Kreait\Firebase as BaseFirebase;
 use Psr\Http\Message\UriInterface;

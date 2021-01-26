@@ -1,9 +1,9 @@
 <?php
 
-namespace Morrislaptop\Firestore\Tests;
+namespace TorMorten\Firestore\Tests;
 
 use Kreait\Firebase\ServiceAccount;
-use Morrislaptop\Firestore\Factory;
+use TorMorten\Firestore\Factory;
 use PHPUnit\Framework\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase

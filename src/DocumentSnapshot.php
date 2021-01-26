@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-namespace Morrislaptop\Firestore;
+namespace TorMorten\Firestore;
 
 use Google\Cloud\Core\Timestamp;
 

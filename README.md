@@ -1,7 +1,4 @@
-# Firestore SDK for PHP without gRPC
-
-[![Current version](https://img.shields.io/packagist/v/morrisalptop/firestore-php.svg)](https://packagist.org/packages/morrislaptop/firestore-php)
-[![Build Status](https://img.shields.io/circleci/project/morrislaptop/firestore-php.svg)](https://circleci.com/gh/morrislaptop/firestore-php)
+# Firestore SDK for PHP (without gRPC)
 
 ## @todo
 
@@ -22,17 +19,19 @@
 
 The recommended way to install is with Composer.
 
-    composer require morrislaptop/firestore-php
+    composer require tormjens/firestore
 
 ## Usage
 
-The library aims to replicate the API signature of [Google's PHP API](https://googlecloudplatform.github.io/google-cloud-php/#/docs/cloud-firestore/v0.11.0/firestore/readme).
+The library aims to replicate the API signature
+of [Google's PHP API](https://googlecloudplatform.github.io/google-cloud-php/#/docs/cloud-firestore/v0.11.0/firestore/readme)
+.
 
 Sample usage:
 
 ```php
 
-use Morrislaptop\Firestore\Factory;
+use TorMorten\Firestore\Factory;
 use Kreait\Firebase\ServiceAccount;
 
 // This assumes that you have placed the Firebase credentials in the same directory

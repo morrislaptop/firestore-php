@@ -1,6 +1,6 @@
 <?php
 
-namespace Morrislaptop\Firestore;
+namespace TorMorten\Firestore;
 
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;

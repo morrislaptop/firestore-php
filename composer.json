@@ -1,40 +1,49 @@
 {
-    "name": "morrislaptop/firestore-php",
+    "name": "tormjens/firestore",
     "description": "Firestore SDK for PHP without gRPC",
-    "keywords": ["firestore", "google", "sdk", "api", "database"],
-    "homepage": "https://github.com/morrislaptop/firestore-php",
+    "keywords": [
+        "firestore",
+        "google",
+        "sdk",
+        "api",
+        "database"
+    ],
+    "homepage": "https://github.com/tormjens/firestore-php",
     "license": "MIT",
     "authors": [
+        {
+            "name": "Tor Morten Jensen",
+            "email": "tormorten@tormorten.no"
+        },
         {
             "name": "Craig Morris",
             "email": "cr@igmorr.is"
         }
     ],
     "support": {
-        "docs": "https://morrislaptop.github.io/firestore-php/",
-        "issues": "https://github.com/morrislaptop/firestore-php/issues",
-        "source": "https://github.com/morrislaptop/firestore-php"
+        "issues": "https://github.com/tormjens/firestore-php/issues",
+        "source": "https://github.com/tormjens/firestore-php"
     },
     "scripts": {
         "test": "phpunit"
     },
     "require": {
-        "kreait/firebase-php": "^4.15",
-        "google/protobuf": "^3.6"
+        "kreait/firebase-php": "^5.14",
+        "google/protobuf": "^v3.14"
     },
     "require-dev": {
-        "morrislaptop/var-dumper-with-context": "^0.2.0",
-        "symfony/var-dumper": "^4.0",
-        "phpunit/phpunit": "^7.1"
+        "morrislaptop/var-dumper-with-context": "^0.3",
+        "symfony/var-dumper": "^5.0",
+        "phpunit/phpunit": "^9.1"
     },
     "autoload": {
         "psr-4": {
-            "Morrislaptop\\Firestore\\": "src"
+            "TorMorten\\Firestore\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Morrislaptop\\Firestore\\Tests\\": "tests",
+            "TorMorten\\Firestore\\Tests\\": "tests",
             "Kreait\\Firebase\\Tests\\": "vendor/kreait/firebase-php/tests"
         }
     }

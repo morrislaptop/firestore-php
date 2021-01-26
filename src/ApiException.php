@@ -1,6 +1,6 @@
 <?php
 
-namespace Morrislaptop\Firestore;
+namespace TorMorten\Firestore;
 
 use Throwable;
 use Kreait\Firebase\Util\JSON;

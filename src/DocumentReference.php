@@ -1,6 +1,6 @@
 <?php
 
-namespace Morrislaptop\Firestore;
+namespace TorMorten\Firestore;
 
 use Psr\Http\Message\UriInterface;
 use Kreait\Firebase\Exception\ApiException;

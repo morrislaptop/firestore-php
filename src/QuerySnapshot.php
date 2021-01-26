@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-namespace Morrislaptop\Firestore;
+namespace TorMorten\Firestore;
 
 /**
  * Represents the result set of a Cloud Firestore Query.

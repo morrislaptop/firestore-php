@@ -1,6 +1,6 @@
 <?php
 
-namespace Morrislaptop\Firestore\Tests;
+namespace TorMorten\Firestore\Tests;
 
 class CollectionTest extends TestCase
 {

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-namespace Morrislaptop\Firestore;
+namespace TorMorten\Firestore;
 
 use Google\ApiCore\ValidationException;
 use Google\Cloud\Firestore\V1beta1\FirestoreClient as FirestoreGapicClient;
