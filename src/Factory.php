@@ -17,16 +17,9 @@ class Factory extends BaseFactory
 
     private static $firestoreUriPattern = 'https://firestore.googleapis.com/v1beta1/projects/%s/databases/(default)/documents/';
 
-    public function createFirestore() : Firestore
+    public function firestore()
     {
         $http = $this->createApiClient();
-
-        if ($this->uid) {
-            $authOverride = new Http\Auth\CustomToken($this->uid, $this->claims);
-
-            $handler = $http->getConfig('handler');
-            $handler->push(Middleware::overrideAuth($authOverride), 'auth_override');
-        }
 
         return new Firestore($this->getFirestoreUri(), new ApiClient($http));
     }
