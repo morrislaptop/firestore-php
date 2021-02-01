@@ -17,6 +17,8 @@
 
 namespace TorMorten\Firestore;
 
+use TorMorten\Firestore\References\Query;
+
 /**
  * Represents the result set of a Cloud Firestore Query.
  *

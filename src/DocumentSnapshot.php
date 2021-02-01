@@ -18,6 +18,7 @@
 namespace TorMorten\Firestore;
 
 use Google\Cloud\Core\Timestamp;
+use TorMorten\Firestore\References\DocumentReference;
 
 /**
  * Represents the data of a document at the time of retrieval.

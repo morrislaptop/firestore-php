@@ -1,12 +1,17 @@
 <?php
 
-namespace TorMorten\Firestore;
+namespace TorMorten\Firestore\References;
 
 use Psr\Http\Message\UriInterface;
 use Kreait\Firebase\Exception\ApiException;
 use Kreait\Firebase\Database\Reference\Validator;
 use Kreait\Firebase\Exception\OutOfRangeException;
 use Kreait\Firebase\Exception\InvalidArgumentException;
+use TorMorten\Firestore\References\DocumentReference;
+use TorMorten\Firestore\Http\ApiClient;
+use TorMorten\Firestore\References\Query;
+use TorMorten\Firestore\Reference;
+use TorMorten\Firestore\ValueMapper;
 
 /**
  * A Reference represents a specific location in your database and can be used
@@ -80,7 +85,7 @@ class CollectionReference extends Query
      *
      * @see https://firebase.google.com/docs/reference/js/firebase.database.Reference#remove
      *
-     * @throws ApiException if the API reported an error
+     * @throws \TorMorten\Firestore\Exceptions\ApiException if the API reported an error
      *
      * @return Reference A new instance for the now empty Reference
      */

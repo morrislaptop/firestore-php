@@ -4,6 +4,8 @@ namespace TorMorten\Firestore;
 
 use Psr\Http\Message\UriInterface;
 use GuzzleHttp\Psr7\Uri;
+use TorMorten\Firestore\Http\ApiClient;
+use TorMorten\Firestore\References\CollectionReference;
 
 /**
  * The Firebase Realtime Database.

@@ -1,12 +1,13 @@
 <?php
 
-namespace TorMorten\Firestore;
+namespace TorMorten\Firestore\Http;
 
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
 use Kreait\Firebase\Util\JSON;
 use Psr\Http\Message\ResponseInterface;
+use TorMorten\Firestore\Exceptions\ApiException;
 
 class ApiClient
 {

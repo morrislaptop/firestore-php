@@ -1,6 +1,6 @@
 <?php
 
-namespace TorMorten\Firestore;
+namespace TorMorten\Firestore\Exceptions;
 
 use Throwable;
 use Kreait\Firebase\Util\JSON;
@@ -9,6 +9,7 @@ use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Exception\RequestException;
 use Kreait\Firebase\Exception\FirebaseException;
 use Fig\Http\Message\StatusCodeInterface as StatusCode;
+use TorMorten\Firestore\Exceptions\PermissionDenied;
 
 class ApiException extends \RuntimeException implements FirebaseException
 {

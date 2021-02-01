@@ -5,6 +5,7 @@ namespace TorMorten\Firestore;
 use Kreait\Firebase as BaseFirebase;
 use Psr\Http\Message\UriInterface;
 use Kreait\Firebase\ServiceAccount;
+use TorMorten\Firestore\Http\ApiClient;
 use function GuzzleHttp\Psr7\uri_for;
 use Kreait\Firebase\Factory as BaseFactory;
 

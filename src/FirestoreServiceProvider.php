@@ -10,9 +10,18 @@ class FirestoreServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->app->singleton(Firestore::class, function () {
-            $castAway = $this->cast(Factory::class, Firebase::project()->factory());
-            return $castAway->firestore();
+        $this->app->singleton(Project::class, function () {
+            return $this->cast(Project::class, Firebase::project());
+        });
+
+        $this->app->singleton(Factory::class, function ($app) {
+            return $this->cast(Factory::class, $app[Project::class]->factory());
+        });
+
+        $this->app->singleton(Firestore::class, function ($app) {
+            $project = $app->make(Project::class);
+            $project->setFactory($app->make(Factory::class));
+            return $project->factory()->firestore();
         });
     }
 

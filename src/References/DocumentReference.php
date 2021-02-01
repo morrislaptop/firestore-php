@@ -1,12 +1,18 @@
 <?php
 
-namespace TorMorten\Firestore;
+namespace TorMorten\Firestore\References;
 
 use Psr\Http\Message\UriInterface;
 use Kreait\Firebase\Exception\ApiException;
 use Kreait\Firebase\Database\Reference\Validator;
 use Kreait\Firebase\Exception\OutOfRangeException;
 use Kreait\Firebase\Exception\InvalidArgumentException;
+use TorMorten\Firestore\Document;
+use TorMorten\Firestore\DocumentSnapshot;
+use TorMorten\Firestore\Http\ApiClient;
+use TorMorten\Firestore\Reference;
+use TorMorten\Firestore\Snapshot;
+use TorMorten\Firestore\ValueMapper;
 
 /**
  * A Reference represents a specific location in your database and can be used
@@ -16,6 +22,11 @@ use Kreait\Firebase\Exception\InvalidArgumentException;
  */
 class DocumentReference
 {
+    /**
+     * @var Document
+     */
+    protected $document;
+
     /**
      * @var UriInterface
      */
@@ -48,6 +59,11 @@ class DocumentReference
         $this->valueMapper = $valueMapper ?? new ValueMapper(null, false);
     }
 
+    public function setDocument(Document $document)
+    {
+        $this->document = $document;
+    }
+
     /**
      * Write data to this database location.
      *
@@ -58,9 +74,9 @@ class DocumentReference
      *
      * @param mixed $value
      *
-     * @throws ApiException if the API reported an error
-     *
      * @return Reference
+     * @throws \TorMorten\Firestore\Exceptions\ApiException if the API reported an error
+     *
      */
     public function set($value, $merge = false): self
     {
@@ -74,8 +90,7 @@ class DocumentReference
             $prefix = '&updateMask.fieldPaths=';
             $query = $prefix . implode($prefix, $paths);
             $uri = $this->uri->withQuery("updateMask.fieldPaths=message$query");
-        }
-        else {
+        } else {
             $uri = $this->uri;
         }
 
@@ -87,17 +102,19 @@ class DocumentReference
     /**
      * Returns a data snapshot of the current location.
      *
-     * @throws ApiException if the API reported an error
-     *
      * @return Snapshot
+     * @throws \TorMorten\Firestore\Exceptions\ApiException if the API reported an error
+     *
      */
     public function snapshot(): DocumentSnapshot
     {
         $value = $this->apiClient->get($this->uri);
 
-        $data = $this->valueMapper->decodeValues($value['fields']);
+        $this->document->update(
+            $value['fields']
+        );
 
-        return new DocumentSnapshot($this, [], $data, true);
+        return $this;
     }
 
     public function delete()
