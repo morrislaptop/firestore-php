@@ -14,15 +14,38 @@ Due to Laravel's auto-discovery capabilities, the service provider is registerer
 
 ## Usage
 
-The library aims to replicate the API signature
-of [Google's PHP API](https://googlecloudplatform.github.io/google-cloud-php/#/docs/cloud-firestore/v0.11.0/firestore/readme)
-.
+This package aims to create a fluent experience, preserving the feel of the Laravel framework.
+
+### Getting started
+
+You first resolve Firestore out of the container.
+
+```php 
+use TorMorten\Firestore\Firestore;
+$firestore = resolve(Factory::class);
+```
+
+You can now start grabbing stuff from Firestore. First you'll need to define the collection your looking into.
+
+```php 
+$collection = $firestore->collection('users');
+```
+
+You'll now have the collection at hand, and can either select all documents in that collection:
+
+```php 
+$documents = $collection->documents();
+```
+
+Or you can grab a single document:
+
+```php 
+$document = $collection->document('1234');
+```
 
 ### Sample usage:
 
 ```php
-use TorMorten\Firestore\Firestore;
-$firestore = resolve(Factory::class);
 
 $collection = $firestore->collection('users');
 $user = $collection->document('123456');
