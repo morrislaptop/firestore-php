@@ -102,19 +102,23 @@ class DocumentReference
     /**
      * Returns a data snapshot of the current location.
      *
-     * @return Snapshot
+     * @return Document
      * @throws \TorMorten\Firestore\Exceptions\ApiException if the API reported an error
      *
      */
-    public function snapshot(): DocumentSnapshot
+    public function snapshot()
     {
         $value = $this->apiClient->get($this->uri);
 
-        $this->document->update(
-            $value['fields']
-        );
+        if (!$this->document) {
+            $this->document = new Document($value['fields'], $this);
+        } else {
+            $this->document->update(
+                $value['fields']
+            );
+        }
 
-        return $this;
+        return $this->document;
     }
 
     public function delete()
