@@ -49,11 +49,6 @@ class DocumentSnapshot implements \ArrayAccess
     private $reference;
 
     /**
-     * @var ValueMapper
-     */
-    private $valueMapper;
-
-    /**
      * @var array
      */
     private $info;
@@ -70,7 +65,6 @@ class DocumentSnapshot implements \ArrayAccess
 
     /**
      * @param DocumentReference $reference The document which created the snapshot.
-     * @param ValueMapper $valueMapper A Firestore Value Mapper.
      * @param array $info Document information, such as create and update timestamps.
      * @param array $data Document field data.
      * @param bool $exists Whether the document exists in the Firestore database.
@@ -80,7 +74,8 @@ class DocumentSnapshot implements \ArrayAccess
         array $info,
         array $data,
         $exists
-    ) {
+    )
+    {
         $this->reference = $reference;
         $this->info = $info;
         $this->data = $data;
@@ -227,7 +222,7 @@ class DocumentSnapshot implements \ArrayAccess
 
         $fields = $this->data;
         foreach ($parts as $idx => $part) {
-            if ($idx === $len-1 && isset($fields[$part])) {
+            if ($idx === $len - 1 && isset($fields[$part])) {
                 $res = $fields[$part];
                 break;
             } else {

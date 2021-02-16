@@ -5,14 +5,9 @@ namespace TorMorten\Firestore\References;
 use Psr\Http\Message\UriInterface;
 use Kreait\Firebase\Exception\ApiException;
 use Kreait\Firebase\Database\Reference\Validator;
-use Kreait\Firebase\Exception\OutOfRangeException;
 use Kreait\Firebase\Exception\InvalidArgumentException;
 use TorMorten\Firestore\Document;
-use TorMorten\Firestore\DocumentSnapshot;
 use TorMorten\Firestore\Http\ApiClient;
-use TorMorten\Firestore\Reference;
-use TorMorten\Firestore\Snapshot;
-use TorMorten\Firestore\ValueMapper;
 
 /**
  * A Reference represents a specific location in your database and can be used
@@ -38,11 +33,6 @@ class DocumentReference
     protected $apiClient;
 
     /**
-     * @var ValueMapper
-     */
-    protected $valueMapper;
-
-    /**
      * Creates a new Reference instance for the given URI which is accessed by
      * the given API client and validated by the Validator (obviously).
      *
@@ -52,11 +42,10 @@ class DocumentReference
      *
      * @throws InvalidArgumentException if the reference URI is invalid
      */
-    public function __construct(UriInterface $uri, ApiClient $apiClient = null, ValueMapper $valueMapper = null)
+    public function __construct(UriInterface $uri, ApiClient $apiClient = null)
     {
         $this->uri = $uri;
         $this->apiClient = $apiClient;
-        $this->valueMapper = $valueMapper ?? new ValueMapper(null, false);
     }
 
     public function setDocument(Document $document)
@@ -74,7 +63,7 @@ class DocumentReference
      *
      * @param mixed $value
      *
-     * @return Reference
+     * @return DocumentReference
      * @throws \TorMorten\Firestore\Exceptions\ApiException if the API reported an error
      *
      */

@@ -4,9 +4,6 @@ namespace TorMorten\Firestore\References;
 
 use TorMorten\Firestore\Collections\DocumentCollection;
 use TorMorten\Firestore\Document;
-use TorMorten\Firestore\DocumentSnapshot;
-use TorMorten\Firestore\QuerySnapshot;
-use TorMorten\Firestore\References\DocumentReference;
 
 /**
  * A Reference represents a specific location in your database and can be used
