@@ -58,8 +58,7 @@ class CollectionReference extends Query
      */
     public function document(string $path): DocumentReference
     {
-        $childPath = sprintf('%s/%s', trim($this->uri->getPath(), '/'), trim($path, '/'));
-
+        $childPath = sprintf('%s/%s/', trim($this->uri->getPath(), '/'), trim($path, '/'));
         try {
             return new DocumentReference($this->uri->withPath($childPath), $this->apiClient);
         } catch (\InvalidArgumentException $e) {
@@ -80,6 +79,8 @@ class CollectionReference extends Query
      */
     public function remove(): self
     {
+        $value = $this->apiClient->get($this->uri);
+        dd($value);
         throw new \BadMethodCallException('Not implemented');
     }
 

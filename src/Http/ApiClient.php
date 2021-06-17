@@ -25,26 +25,27 @@ class ApiClient
     {
         $response = $this->request('GET', $uri);
 
-        return JSON::decode((string) $response->getBody(), true);
+        return JSON::decode((string)$response->getBody(), true);
     }
 
     public function patch($uri, $value)
     {
         $response = $this->request('PATCH', $uri, ['json' => $value]);
 
-        return JSON::decode((string) $response->getBody(), true);
+        return JSON::decode((string)$response->getBody(), true);
     }
 
     public function post($uri, $value)
     {
         $response = $this->request('POST', $uri, ['json' => $value]);
 
-        return JSON::decode((string) $response->getBody(), true);
+        return JSON::decode((string)$response->getBody(), true);
     }
 
     public function delete($uri)
     {
-        $this->request('DELETE', $uri);
+        $response = $this->request('DELETE', $uri);
+        return JSON::decode((string)$response->getBody(), true);
     }
 
     protected function request(string $method, $uri, array $options = []): ResponseInterface

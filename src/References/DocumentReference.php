@@ -8,6 +8,7 @@ use Kreait\Firebase\Database\Reference\Validator;
 use Kreait\Firebase\Exception\InvalidArgumentException;
 use TorMorten\Firestore\Document;
 use TorMorten\Firestore\Http\ApiClient;
+use TorMorten\Firestore\Support\ReverseMapValues;
 
 /**
  * A Reference represents a specific location in your database and can be used
@@ -69,9 +70,10 @@ class DocumentReference
      */
     public function set($value, $merge = false): self
     {
+
         $payload = [
             'name' => basename($this->uri->getPath()),
-            'fields' => $this->valueMapper->encodeValues($value),
+            'fields' => $value,
         ];
 
         if ($merge) {
@@ -84,6 +86,32 @@ class DocumentReference
         }
 
         $this->apiClient->patch($uri, $payload);
+
+        return $this;
+    }
+
+    /**
+     * Write data to this database location.
+     *
+     * This will overwrite any data at this location and all child locations.
+     *
+     * Passing null for the new value is equivalent to calling {@see remove()}:
+     * all data at this location or any child location will be deleted.
+     *
+     * @param mixed $value
+     *
+     * @return DocumentReference
+     * @throws \TorMorten\Firestore\Exceptions\ApiException if the API reported an error
+     *
+     */
+    public function store($value): self
+    {
+
+        $payload = [
+            'fields' => resolve(ReverseMapValues::class)->map($value),
+        ];
+
+        $this->apiClient->post($this->uri, $payload);
 
         return $this;
     }
@@ -112,6 +140,7 @@ class DocumentReference
 
     public function delete()
     {
-        $this->apiClient->delete($this->uri);
+        $response = $this->apiClient->delete($this->uri);
+        dd($response, $this->uri);
     }
 }

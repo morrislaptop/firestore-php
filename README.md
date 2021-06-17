@@ -4,6 +4,11 @@ The library implements seamless with `kreait/laravel-firebase`, and also mocks s
 don't have to set up a client twice. To achieve this we're using reflection, so if you're shomehow uncomfortable with
 this, then steer away.
 
+I started this package with [morrislaptop/firestore-php](https://github.com/morrislaptop/firestore-php) as a foundation,
+and then grew it to become a plug-and-play integration with the `kreait` package.
+
+This package is not mature for general usage just yet. Use at your own risk.
+
 ## Installation
 
 This package is installed via Composer.
@@ -23,6 +28,15 @@ You first resolve Firestore out of the container.
 ```php 
 use TorMorten\Firestore\Firestore;
 $firestore = resolve(Factory::class);
+```
+
+You can also resolve using dependency injection.
+
+```php 
+public function __construct(Factory $firestore)
+{
+    $this->firestore = $firestore;
+}
 ```
 
 You can now start grabbing stuff from Firestore. First you'll need to define the collection your looking into.
@@ -54,21 +68,8 @@ $user = $collection->document('123456');
 $user->set(['name' => 'tormjens', 'role' => 'developer']);
 
 // Get a document
-$snap = $user->snapshot();
-echo $snap['name']; // tormjens
+echo $user->name; // tormjens
+
+// Delete a document
+$user->delete();
 ```
-
-## @todo
-
-- [x] Get
-- [x] Set
-- [ ] Delete
-- [ ] Add
-- [ ] Transactions (beginTransaction, commit, rollback)
-- [ ] Reference value support
-- [ ] Batch Get
-- [ ] List Documents
-- [ ] Query
-- [ ] Order
-- [ ] Limit
-- [ ] Indexes (create, delete, list, get)
