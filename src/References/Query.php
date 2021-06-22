@@ -15,8 +15,9 @@ class Query
 {
     public function documents(array $options = [])
     {
-        $value = $this->apiClient->get($this->uri);
-        dd($this->uri . '?' . http_build_query($options));
+        $query = http_build_query($options);
+        $value = $this->apiClient->get($this->uri . ($query ? "?$query" : ''));
+
         $documents = new DocumentCollection();
 
         if (empty($value)) {
