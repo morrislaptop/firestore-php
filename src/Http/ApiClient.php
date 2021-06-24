@@ -50,7 +50,7 @@ class ApiClient
 
     protected function request(string $method, $uri, array $options = []): ResponseInterface
     {
-        $request = new Request($method, $uri);
+        $request = new Request($method, trim($uri, '/'));
 
         try {
             return $this->httpClient->send($request, $options);

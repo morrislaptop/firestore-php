@@ -60,7 +60,7 @@ class CollectionReference extends Query
     {
         $childPath = sprintf('%s/%s/', trim($this->uri->getPath(), '/'), trim($path, '/'));
         try {
-            return new DocumentReference($this->uri->withPath($childPath), $this->apiClient);
+            return new DocumentReference($this->uri->withPath($childPath), $this->apiClient, $path);
         } catch (\InvalidArgumentException $e) {
             throw new InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }

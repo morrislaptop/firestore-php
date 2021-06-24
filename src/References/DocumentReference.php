@@ -16,7 +16,7 @@ use TorMorten\Firestore\Support\ReverseMapValues;
  *
  * @see https://firebase.google.com/docs/reference/js/firebase.database.Reference
  */
-class DocumentReference
+class DocumentReference extends Query
 {
     /**
      * @var Document
@@ -32,6 +32,10 @@ class DocumentReference
      * @var ApiClient
      */
     protected $apiClient;
+    /**
+     * @var null
+     */
+    protected $path;
 
     /**
      * Creates a new Reference instance for the given URI which is accessed by
@@ -43,10 +47,11 @@ class DocumentReference
      *
      * @throws InvalidArgumentException if the reference URI is invalid
      */
-    public function __construct(UriInterface $uri, ApiClient $apiClient = null)
+    public function __construct(UriInterface $uri, ApiClient $apiClient = null, $path = null)
     {
         $this->uri = $uri;
         $this->apiClient = $apiClient;
+        $this->path = $path;
     }
 
     public function setDocument(Document $document)
@@ -117,6 +122,33 @@ class DocumentReference
     }
 
     /**
+     * Write data to this database location.
+     *
+     * This will overwrite any data at this location and all child locations.
+     *
+     * Passing null for the new value is equivalent to calling {@see remove()}:
+     * all data at this location or any child location will be deleted.
+     *
+     * @param mixed $value
+     *
+     * @return DocumentReference
+     * @throws \TorMorten\Firestore\Exceptions\ApiException if the API reported an error
+     *
+     */
+    public function update($value): self
+    {
+
+        $payload = [
+            'name' => $this->path,
+            'fields' => resolve(ReverseMapValues::class)->map($value),
+        ];
+
+        $this->apiClient->patch($this->uri, $payload);
+
+        return $this;
+    }
+
+    /**
      * Returns a data snapshot of the current location.
      *
      * @return Document
@@ -140,7 +172,6 @@ class DocumentReference
 
     public function delete()
     {
-        $response = $this->apiClient->delete($this->uri);
-        dd($response, $this->uri);
+        return $this->apiClient->delete($this->uri);
     }
 }

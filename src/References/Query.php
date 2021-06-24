@@ -17,7 +17,6 @@ class Query
     {
         $query = http_build_query($options);
         $value = $this->apiClient->get($this->uri . ($query ? "?$query" : ''));
-
         $documents = new DocumentCollection();
 
         if (empty($value)) {
