@@ -48,4 +48,13 @@ class ReverseMapValues
 
         return false;
     }
+
+    protected function mapArrayValue($value)
+    {
+        if (is_array($value)) {
+            return ['arrayValue' => null];
+        }
+
+        return false;
+    }
 }
