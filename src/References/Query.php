@@ -13,8 +13,11 @@ use TorMorten\Firestore\Document;
  */
 class Query
 {
+    protected $options = [];
+
     public function documents(array $options = [])
     {
+        $options = array_merge($options, $this->options);
         $query = http_build_query($options);
         $value = $this->apiClient->get($this->uri . ($query ? "?$query" : ''));
         $documents = new DocumentCollection();

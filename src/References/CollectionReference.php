@@ -66,6 +66,16 @@ class CollectionReference extends Query
         }
     }
 
+    public function where($key, $operator, $value = null)
+    {
+        if(!$value) {
+            $value = $operator;
+            $operator = '=';
+        }
+
+
+    }
+
     /**
      * Remove the data at this database location.
      *
