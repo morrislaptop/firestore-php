@@ -14,9 +14,7 @@ class FirestoreServiceProvider extends ServiceProvider
             return $this->cast(Project::class, Firebase::project());
         });
 
-        $this->app->singleton(Factory::class, function ($app) {
-            return $this->cast(Factory::class, $app[Project::class]->factory());
-        });
+        $this->app->singleton(Factory::class);
 
         $this->app->singleton(Firestore::class, function ($app) {
             $project = $app->make(Project::class);

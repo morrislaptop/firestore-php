@@ -35,7 +35,7 @@ class Project
     /** @var \Kreait\Firebase\Storage|null */
     protected $storage;
 
-    public function setFactory(Firebase\Factory $factory)
+    public function setFactory(Factory $factory)
     {
         $this->factory = $factory;
     }
@@ -108,7 +108,7 @@ class Project
         return $this->storage;
     }
 
-    public function factory(): Firebase\Factory
+    public function factory()
     {
         return $this->factory;
     }

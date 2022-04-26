@@ -28,7 +28,9 @@
         "test": "phpunit"
     },
     "require": {
-        "kreait/laravel-firebase": "^3.0",
+        "kreait/laravel-firebase": "^4.1",
+        "google/apiclient": "^2.12.1",
+        "google/apiclient-services": "^0.246.0",
         "google/protobuf": "^v3.14",
         "guzzlehttp/psr7": "^1.8.3"
     },
