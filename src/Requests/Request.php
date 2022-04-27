@@ -14,4 +14,9 @@ abstract class Request
         $this->resource = $resource;
         $this->parameters = $parameters;
     }
+
+    public function getResource()
+    {
+        return $this->resource;
+    }
 }

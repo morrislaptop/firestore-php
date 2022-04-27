@@ -1,13 +1,6 @@
 # Firestore SDK for Laravel (without gRPC)
 
-The library implements seamless with `kreait/laravel-firebase`, and also mocks some of their internal classes, so you
-don't have to set up a client twice. To achieve this we're using reflection, so if you're shomehow uncomfortable with
-this, then steer away.
-
-I started this package with [morrislaptop/firestore-php](https://github.com/morrislaptop/firestore-php) as a foundation,
-and then grew it to become a plug-and-play integration with the `kreait` package.
-
-This package is not mature for general usage just yet. Use at your own risk.
+Leveraging the Google PHP API Client for communication.
 
 ## Installation
 
@@ -27,7 +20,7 @@ You first resolve Firestore out of the container.
 
 ```php 
 use TorMorten\Firestore\Firestore;
-$firestore = resolve(Factory::class);
+$firestore = resolve(Firestore::class);
 ```
 
 You can also resolve using dependency injection.
@@ -57,6 +50,9 @@ Or you can grab a single document:
 $document = $collection->document('1234');
 ```
 
+Be aware that the last one simply creates an instance of a document. If you want to fetch the document from firebase 
+you'll have to add `->fetch()` to that call.
+
 ### Sample usage:
 
 ```php
@@ -64,8 +60,11 @@ $document = $collection->document('1234');
 $collection = $firestore->collection('users');
 $user = $collection->document('123456');
 
-// Save a document
-$user->set(['name' => 'tormjens', 'role' => 'developer']);
+// Fetches the document from Firebase
+$user->fetch();
+
+// Create/update a document
+$user->update(['name' => 'tormjens', 'role' => 'developer']);
 
 // Get a document
 echo $user->name; // tormjens

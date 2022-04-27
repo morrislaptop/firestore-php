@@ -1,6 +1,6 @@
 {
     "name": "tormjens/firestore",
-    "description": "Firestore SDK for Laravel without gRPC",
+    "description": "Firestore SDK for Laravel",
     "keywords": [
         "firestore",
         "google",
@@ -28,26 +28,15 @@
         "test": "phpunit"
     },
     "require": {
-        "kreait/laravel-firebase": "^4.1",
+        "laravel/framework": "^8.0|^9.0",
         "google/apiclient": "^2.12.1",
-        "google/apiclient-services": "^0.246.0",
-        "google/protobuf": "^v3.14",
-        "guzzlehttp/psr7": "^1.8.3"
+        "google/apiclient-services": "^0.246.0"
     },
     "require-dev": {
-        "morrislaptop/var-dumper-with-context": "^0.3",
-        "symfony/var-dumper": "^5.0",
-        "phpunit/phpunit": "^9.1"
     },
     "autoload": {
         "psr-4": {
             "TorMorten\\Firestore\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "TorMorten\\Firestore\\Tests\\": "tests",
-            "Kreait\\Firebase\\Tests\\": "vendor/kreait/firebase-php/tests"
         }
     },
     "extra": {

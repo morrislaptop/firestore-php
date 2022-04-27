@@ -19,12 +19,17 @@ class FirestoreApi
     protected function buildGoogleClient()
     {
         $client = new Client();
-        $client->setAuthConfig(base_path(env('FIREBASE_CREDENTIALS')));
+        $client->setAuthConfig(base_path(config('firestore.service_account_file')));
 
         $client->setApplicationName("TorMorten\\Firestore");
         $client->setScopes(['https://www.googleapis.com/auth/datastore']);
 
         $this->client = new Firestore($client);
+    }
+
+    public function resource()
+    {
+        return $this->client->projects_databases_documents;
     }
 
     public function collection($path)

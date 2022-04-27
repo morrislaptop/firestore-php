@@ -2,10 +2,7 @@
 
 namespace TorMorten\Firestore;
 
-use Psr\Http\Message\UriInterface;
-use GuzzleHttp\Psr7\Uri;
-use TorMorten\Firestore\Http\ApiClient;
-use TorMorten\Firestore\References\CollectionReference;
+use TorMorten\Firestore\Http\FirestoreApi;
 
 /**
  * The Firebase Realtime Database.
@@ -15,59 +12,23 @@ use TorMorten\Firestore\References\CollectionReference;
 class Firestore
 {
     /**
-     * @var ApiClient
+     * @var FirestoreApi
      */
-    private $client;
-
-    /**
-     * @var UriInterface
-     */
-    private $uri;
+    private FirestoreApi $client;
 
     /**
      * Creates a new database instance for the given database URI
      * which is accessed by the given API client.
      *
-     * @param UriInterface $uri
-     * @param ApiClient $client
+     * @param FirestoreApi $client
      */
-    public function __construct(UriInterface $uri, ApiClient $client)
+    public function __construct(FirestoreApi $client)
     {
-        $this->uri = $uri;
         $this->client = $client;
     }
 
-    /**
-     * Returns a collection.
-     *
-     * @param string $name
-     *
-     * @throws InvalidArgumentException
-     *
-     * @return Reference
-     */
-    public function collection(string $path = ''): CollectionReference
+    public function __call(string $name, array $arguments)
     {
-        try {
-            return new CollectionReference(Uri::resolve($this->uri, $path), $this->client);
-        } catch (\InvalidArgumentException $e) {
-            throw new InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
-        }
-    }
-
-    /**
-     * Returns the root collections.
-     */
-    public function collections()
-    {
-        $uri = $this->uri->withPath($this->uri->getPath() . ':listCollectionIds');
-        $value = $this->client->post($uri, null);
-        $collections = [];
-
-        foreach ($value['collectionIds'] as $id) {
-            $collections[] = $this->collection($id);
-        }
-
-        return $collections;
+        return $this->client->{$name}(...$arguments);
     }
 }

@@ -4,6 +4,7 @@ namespace TorMorten\Firestore\Requests;
 
 use Illuminate\Support\Str;
 use TorMorten\Firestore\References\Collection as CollectionReference;
+use TorMorten\Firestore\References\Document as DocumentReference;
 use TorMorten\Firestore\Support\ServiceAccount;
 
 class Collection extends Request
@@ -22,6 +23,11 @@ class Collection extends Request
 
     public function documents()
     {
-        return new CollectionReference($this->resource->listDocuments($this->buildPath(), $this->getCollectionId()));
+        return new CollectionReference($this->resource->listDocuments($this->buildPath(), $this->getCollectionId()), $this);
+    }
+
+    public function document($id)
+    {
+        return new DocumentReference($id, null, $this);
     }
 }

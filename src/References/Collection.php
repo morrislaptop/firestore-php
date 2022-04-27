@@ -3,12 +3,16 @@
 namespace TorMorten\Firestore\References;
 
 use Google\Service\Firestore\ListDocumentsResponse;
+use TorMorten\Firestore\Requests\Collection as CollectionRequest;
 
 class Collection extends \Illuminate\Support\Collection
 {
-    public function __construct(ListDocumentsResponse $documents)
+    protected CollectionRequest $collection;
+
+    public function __construct(ListDocumentsResponse $documents, CollectionRequest $collection)
     {
         $this->mapToDocuments($documents);
+        $this->collection = $collection;
     }
 
     protected function mapToDocuments($documents)
